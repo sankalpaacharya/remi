@@ -1,4 +1,6 @@
-Remi
+### Remi
+
+<samp>Generate Super Cool Readme for your project</samp>
 
 Catppuccin theme again the PC like feel,
 a window, where there is shortcut to shift between the code and preview

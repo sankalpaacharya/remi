@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -214,16 +215,4 @@
 
   --dv-active-sash-color: color-mix(in oklch, var(--primary) 30%, var(--border) 70%);
   --dv-floating-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-}
-
-.dockview-theme-minimal .dv-workspace {
-  background: url("/wallpapers/gamer.png") center/cover no-repeat fixed;
-  background-attachment: fixed;
-}
-
-.dv-view {
-  border-radius: 6px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  padding: 0;
 }

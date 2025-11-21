@@ -1,13 +1,12 @@
-import {
-  SunMedium,
-  Clock,
-  Calendar,
-  Twitter,
-  Github,
-} from "lucide-react";
+import { SunMedium, Clock, Calendar, Twitter, Github } from "lucide-react";
 
 export function StatusBar() {
-  const workspaces = Array.from({ length: 9 }, (_, i) => i + 1);
+  const workspaces = [
+    { id: 1, name: "Editor" },
+    { id: 2, name: "Templates" },
+    { id: 3, name: "Settings" },
+    { id: 4, name: "About" },
+  ];
   const activeWorkspace = 1;
 
   const now = new Date();
@@ -23,24 +22,34 @@ export function StatusBar() {
 
   const statusItems = [
     { label: "BRI", value: "30%", icon: SunMedium, link: null },
-    { label: "Twitter", value: "@sankalpa_02", icon: Twitter, link: "https://twitter.com/username" },
-    { label: "GitHub", value: "@sankalpaacharya", icon: Github, link: "https://github.com/username" },
+    {
+      label: "Twitter",
+      value: "@sankalpa_02",
+      icon: Twitter,
+      link: "https://twitter.com/sankalpa_02",
+    },
+    {
+      label: "GitHub",
+      value: "@sankalpaacharya",
+      icon: Github,
+      link: "https://github.com/sankalpaacharya",
+    },
   ];
 
   return (
     <div className="flex w-full justify-between items-center px-3 py-1 bg-background border-b border-border text-foreground text-sm font-mono">
       {/* Workspaces */}
       <div className="flex items-center gap-1">
-        {workspaces.map((num) => (
+        {workspaces.map((workspace) => (
           <div
-            key={num}
-            className={`px-2 py-0.5 min-w-8 text-center cursor-pointer transition-colors ${
-              num === activeWorkspace
+            key={workspace.id}
+            className={`px-3 py-0.5 text-center cursor-pointer transition-colors ${
+              workspace.id === activeWorkspace
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
-            {num}
+            {workspace.name}
           </div>
         ))}
       </div>
@@ -54,7 +63,7 @@ export function StatusBar() {
               <span className="text-xs">{value}</span>
             </>
           );
-          
+
           return link ? (
             <a
               key={idx}

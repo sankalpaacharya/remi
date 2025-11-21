@@ -1,5 +1,6 @@
 "use client";
 import {StatusBar} from "@/components/status-bar";
+import { ReadmeMaker } from "@/components/maker";
 
 export default function Home() {
 	return (
@@ -7,7 +8,7 @@ export default function Home() {
 			<StatusBar/>
 			<div className="flex-1 p-2 w-full h-full">
 			<div className="border w-full h-full">
-				window
+				<ReadmeMaker/>
 			</div>
 
 			</div>
