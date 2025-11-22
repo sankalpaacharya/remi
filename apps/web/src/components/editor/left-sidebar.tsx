@@ -8,6 +8,7 @@ import {
   getBadgeItems,
   ADDITIONAL_LINKS,
   TECH_STACK_ITEMS,
+  SOCIAL_MEDIA_ITEMS,
 } from "./left-sidebar/badge-data";
 import { BadgesTab } from "./left-sidebar/badges-tab";
 import { OtherTab } from "./left-sidebar/other-tab";
@@ -20,6 +21,7 @@ export default function LeftSideBar() {
 
   const badgeItems = getBadgeItems(repoUrl);
   const totalItems = badgeItems.length + ADDITIONAL_LINKS.length;
+  const totalIconsCount = TECH_STACK_ITEMS.length + SOCIAL_MEDIA_ITEMS.length;
 
   return (
     <div className="h-full w-full flex flex-col font-mono text-sm">
@@ -51,10 +53,10 @@ export default function LeftSideBar() {
             Badges
           </TabsTrigger>
           <TabsTrigger
-            value="tech-stack"
+            value="icons"
             className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
           >
-            Tech Stack
+            Icons
           </TabsTrigger>
         </TabsList>
 
@@ -75,15 +77,18 @@ export default function LeftSideBar() {
             </div>
           </div>
         </TabsContent>
-        <TabsContent value="tech-stack" className="flex-1 flex flex-col m-0">
-          <TechStackTab items={TECH_STACK_ITEMS} />
-          {/* Footer for Tech Stack tab */}
+        <TabsContent value="icons" className="flex-1 flex flex-col m-0">
+          <TechStackTab
+            techStackItems={TECH_STACK_ITEMS}
+            socialItems={SOCIAL_MEDIA_ITEMS}
+          />
+          {/* Footer for Icons tab */}
           <div className="px-4 py-2 border-t">
             <div className="text-xs text-muted-foreground">
               <div className="flex items-center justify-between">
                 <span>Click to add icons</span>
                 <span className="text-primary font-semibold">
-                  {TECH_STACK_ITEMS.length} icons
+                  {totalIconsCount} icons
                 </span>
               </div>
             </div>

@@ -430,5 +430,183 @@ export const TECH_STACK_ITEMS: TechStackItem[] = [
   },
 ];
 
+// Social Media Icons
+export const SOCIAL_MEDIA_ITEMS: TechStackItem[] = [
+  // Professional Networks
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png",
+    category: "Professional",
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg",
+    category: "Professional",
+  },
+  {
+    id: "stackoverflow",
+    name: "Stack Overflow",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Stack_Overflow_icon.svg",
+    category: "Professional",
+  },
+  {
+    id: "leetcode",
+    name: "LeetCode",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png",
+    category: "Professional",
+  },
+  {
+    id: "hackerrank",
+    name: "HackerRank",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png",
+    category: "Professional",
+  },
+  {
+    id: "codepen",
+    name: "CodePen",
+    iconUrl: "https://www.svgrepo.com/show/471218/codepen.svg",
+    category: "Professional",
+  },
+  {
+    id: "gitlab",
+    name: "GitLab",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg",
+    category: "Professional",
+  },
+  {
+    id: "bitbucket",
+    name: "Bitbucket",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Bitbucket-blue-logomark-only.svg",
+    category: "Professional",
+  },
+
+  // Social Platforms
+  {
+    id: "twitter",
+    name: "Twitter/X",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png",
+    category: "Social",
+  },
+  {
+    id: "instagram",
+    name: "Instagram",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png",
+    category: "Social",
+  },
+  {
+    id: "facebook",
+    name: "Facebook",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg",
+    category: "Social",
+  },
+  {
+    id: "youtube",
+    name: "YouTube",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg",
+    category: "Social",
+  },
+
+  {
+    id: "discord",
+    name: "Discord",
+    iconUrl: "https://www.svgrepo.com/show/353655/discord-icon.svg",
+    category: "Social",
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg",
+    category: "Social",
+  },
+  {
+    id: "telegram",
+    name: "Telegram",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg",
+    category: "Social",
+  },
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg",
+    category: "Social",
+  },
+  {
+    id: "mastodon",
+    name: "Mastodon",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Mastodon_logotype_%28simple%29_new_hue.svg",
+    category: "Social",
+  },
+
+  // Content Platforms
+  {
+    id: "medium",
+    name: "Medium",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Medium_%28website%29_logo.svg",
+    category: "Content",
+  },
+  {
+    id: "devto",
+    name: "Dev.to",
+    iconUrl: "https://www.svgrepo.com/show/349334/dev-to.svg",
+    category: "Content",
+  },
+  {
+    id: "hashnode",
+    name: "Hashnode",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/0/06/Hashnode_icon.svg",
+    category: "Content",
+  },
+
+  {
+    id: "twitch",
+    name: "Twitch",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg",
+    category: "Content",
+  },
+
+  // Design & Creative
+  {
+    id: "dribbble",
+    name: "Dribbble",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Dribbble_logo.svg/76px-Dribbble_logo.svg.png?20230906114116",
+    category: "Design",
+  },
+  {
+    id: "behance",
+    name: "Behance",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Behance_logo.svg",
+    category: "Design",
+  },
+  {
+    id: "pinterest",
+    name: "Pinterest",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png",
+    category: "Design",
+  },
+
+  // Other
+  {
+    id: "spotify",
+    name: "Spotify",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+    category: "Other",
+  },
+  {
+    id: "paypal",
+    name: "PayPal",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg",
+    category: "Other",
+  },
+
+  {
+    id: "patreon",
+    name: "Patreon",
+    iconUrl: "https://upload.wikimedia.org/wikipedia/commons/9/94/Patreon_logo.svg",
+    category: "Other",
+  },
+];
+
 
 

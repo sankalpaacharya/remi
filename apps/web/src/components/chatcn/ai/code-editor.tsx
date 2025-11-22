@@ -102,6 +102,7 @@ export function CodeEditArea({
           roundedSelection: false,
           scrollBeyondLastLine: false,
           automaticLayout: true,
+          wordWrap: "on",
           ...props.options,
         }}
         {...props}

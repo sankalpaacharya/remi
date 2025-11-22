@@ -22,4 +22,5 @@ export interface TechStackItem {
   category: string;
 }
 
-export type TabValue = "badges" | "content" | "tech-stack";
+export type TabValue = "badges" | "content" | "icons";
+export type IconTabValue = "tech-stack" | "social";
