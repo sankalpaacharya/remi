@@ -68,18 +68,18 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative rounded-md md:text-xl overflow-auto border bg-card w-full max-w-full shrink",
+        "relative rounded-md overflow-hidden w-full max-w-full group",
         className
       )}
-      style={{ height: "100%", maxHeight: `${height}px` }}
+      style={{ maxHeight: `${height}px` }}
     >
-      <div className="sticky top-5 flex justify-end -mt-8 mr-5">
+      <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
         <Tooltip>
           <TooltipTrigger
-            className="p-1 rounded-md hover:bg-muted transition"
+            className="p-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] transition text-gray-300"
             onClick={handleCopy}
           >
-            {copied ? <Check size={18} /> : <Clipboard size={18} />}
+            {copied ? <Check size={16} /> : <Clipboard size={16} />}
           </TooltipTrigger>
           <TooltipContent>
             <p>{copied ? "Copied!" : "Copy to Clipboard"}</p>
@@ -88,8 +88,8 @@ export function CodeBlock({
       </div>
 
       {html == null ? (
-        <div className="w-full overflow-x-auto text-sm md:text-base [&>pre]:px-4 [&>pre]:py-4">
-          <pre className="bg-card text-foreground">
+        <div className="w-full overflow-x-auto text-sm [&>pre]:px-4 [&>pre]:py-3 [&>pre]:my-0">
+          <pre className="bg-transparent text-foreground font-mono">
             <code>
               {children.split("\n").map((line, i) => (
                 <span key={i} className="line">
@@ -103,7 +103,7 @@ export function CodeBlock({
       ) : (
         <div
           className={cn(
-            "w-full overflow-x-auto md:text-base text-sm [&>pre]:px-4 [&>pre]:py-4"
+            "w-full overflow-x-auto text-sm [&>pre]:px-4 [&>pre]:py-3 [&>pre]:my-0 [&>pre]:bg-transparent"
           )}
           dangerouslySetInnerHTML={{ __html: html }}
         />

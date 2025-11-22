@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, ChevronDown, Copy, Check } from "lucide-react";
+import { ChevronRight, ChevronDown, Plus, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { Markdown } from "../../chatcn/ai/markdown";
 import type { BadgeItem, LinkItem } from "./types";
 import { generateMarkdownImage, getUniqueCategories } from "./utils";
+import { useStore } from "@/store/useStore";
 
 interface BadgesTabProps {
   badges: BadgeItem[];
@@ -23,7 +24,8 @@ export function BadgesTab({ badges, links }: BadgesTabProps) {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set(["Stats", "Custom", "Analytics", "Badges"])
   );
-  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const { appendMarkdownContent } = useStore();
 
   const toggleCategory = (category: string) => {
     setExpandedCategories((prev) => {
@@ -37,14 +39,12 @@ export function BadgesTab({ badges, links }: BadgesTabProps) {
     });
   };
 
-  const handleCopyMarkdown = (url: string, name: string, id: string) => {
+  const handleAddMarkdown = (url: string, name: string, id: string) => {
     const markdownImage = generateMarkdownImage(name, url);
-    navigator.clipboard.writeText(markdownImage);
-    setCopiedId(id);
-    toast.success(`Copied ${name}`, {
-      description: "Markdown badge copied to clipboard",
-    });
-    setTimeout(() => setCopiedId(null), 2000);
+    appendMarkdownContent(markdownImage);
+    setAddedId(id);
+    toast.success(`${name} added to README`);
+    setTimeout(() => setAddedId(null), 2000);
   };
 
   const categories = getUniqueCategories(badges, links);
@@ -59,8 +59,8 @@ export function BadgesTab({ badges, links }: BadgesTabProps) {
           links={links}
           isExpanded={expandedCategories.has(category)}
           onToggle={() => toggleCategory(category)}
-          copiedId={copiedId}
-          onCopy={handleCopyMarkdown}
+          addedId={addedId}
+          onAdd={handleAddMarkdown}
         />
       ))}
     </div>
@@ -74,8 +74,8 @@ interface CategorySectionProps {
   links: LinkItem[];
   isExpanded: boolean;
   onToggle: () => void;
-  copiedId: string | null;
-  onCopy: (url: string, name: string, id: string) => void;
+  addedId: string | null;
+  onAdd: (url: string, name: string, id: string) => void;
 }
 
 function CategorySection({
@@ -84,8 +84,8 @@ function CategorySection({
   links,
   isExpanded,
   onToggle,
-  copiedId,
-  onCopy,
+  addedId,
+  onAdd,
 }: CategorySectionProps) {
   const categoryItems = [
     ...badges.filter((item) => item.category === category),
@@ -120,8 +120,8 @@ function CategorySection({
             <BadgeItem
               key={item.id}
               item={item}
-              isCopied={copiedId === item.id}
-              onCopy={onCopy}
+              isAdded={addedId === item.id}
+              onAdd={onAdd}
             />
           ))}
         </div>
@@ -132,11 +132,11 @@ function CategorySection({
 
 interface BadgeItemProps {
   item: BadgeItem | LinkItem;
-  isCopied: boolean;
-  onCopy: (url: string, name: string, id: string) => void;
+  isAdded: boolean;
+  onAdd: (url: string, name: string, id: string) => void;
 }
 
-function BadgeItem({ item, isCopied, onCopy }: BadgeItemProps) {
+function BadgeItem({ item, isAdded, onAdd }: BadgeItemProps) {
   const Icon = item.icon;
   const hasUrl = "url" in item && item.url;
   const markdownCode = hasUrl ? generateMarkdownImage(item.name, item.url) : "";
@@ -149,7 +149,7 @@ function BadgeItem({ item, isCopied, onCopy }: BadgeItemProps) {
           disabled={!hasUrl}
           onClick={() => {
             if (hasUrl) {
-              onCopy(item.url, item.name, item.id);
+              onAdd(item.url, item.name, item.id);
             }
           }}
           className={cn(
@@ -161,10 +161,10 @@ function BadgeItem({ item, isCopied, onCopy }: BadgeItemProps) {
           <span className="text-xs truncate flex-1 text-left">{item.name}</span>
           {hasUrl && (
             <>
-              {isCopied ? (
-                <Check className="size-3 text-primary shrink-0" />
+              {isAdded ? (
+                <Check className="size-3 text-green-500 shrink-0" />
               ) : (
-                <Copy className="size-3 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                <Plus className="size-3 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
               )}
             </>
           )}

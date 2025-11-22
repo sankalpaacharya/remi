@@ -17,9 +17,7 @@ export const getBadgeUrls = (repoUrl: string) => {
   const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
   const repoPath = match ? `${match[1]}/${match[2]}` : "user/repo";
   
-  // Extract repo ID for Repobeats (this would need to be fetched from Repobeats API)
-  // For now, using a placeholder - users will need to get their own embed ID from repobeats.axiom.co
-  const repobeatsId = "REPOBEATS_EMBED_ID"; // Placeholder
+  const repobeatsId = "REPOBEATS_EMBED_ID"; 
 
   return {
     stars: `https://img.shields.io/github/stars/${repoPath}`,
