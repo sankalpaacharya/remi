@@ -4,9 +4,14 @@ import { useState } from "react";
 import { Link2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStore } from "@/store/useStore";
-import { getBadgeItems, ADDITIONAL_LINKS } from "./left-sidebar/badge-data";
+import {
+  getBadgeItems,
+  ADDITIONAL_LINKS,
+  TECH_STACK_ITEMS,
+} from "./left-sidebar/badge-data";
 import { BadgesTab } from "./left-sidebar/badges-tab";
 import { OtherTab } from "./left-sidebar/other-tab";
+import { TechStackTab } from "./left-sidebar/tech-stack-tab";
 import type { TabValue } from "./left-sidebar/types";
 
 export default function LeftSideBar() {
@@ -45,6 +50,12 @@ export default function LeftSideBar() {
           >
             Badges
           </TabsTrigger>
+          <TabsTrigger
+            value="tech-stack"
+            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+          >
+            Tech Stack
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="content" className="flex-1 flex flex-col m-0">
@@ -59,6 +70,20 @@ export default function LeftSideBar() {
                 <span>Copy as Markdown</span>
                 <span className="text-primary font-semibold">
                   {totalItems} items
+                </span>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="tech-stack" className="flex-1 flex flex-col m-0">
+          <TechStackTab items={TECH_STACK_ITEMS} />
+          {/* Footer for Tech Stack tab */}
+          <div className="px-4 py-2 border-t">
+            <div className="text-xs text-muted-foreground">
+              <div className="flex items-center justify-between">
+                <span>Click to add icons</span>
+                <span className="text-primary font-semibold">
+                  {TECH_STACK_ITEMS.length} icons
                 </span>
               </div>
             </div>

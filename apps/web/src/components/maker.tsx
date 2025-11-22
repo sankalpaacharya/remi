@@ -14,7 +14,7 @@ export function ReadmeMaker() {
   return (
     <ResizablePanelGroup direction="horizontal" className="w-full h-full">
       {/* Left Sidebar */}
-      <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
+      <ResizablePanel defaultSize={15} minSize={15} maxSize={30}>
         <LeftSideBar />
       </ResizablePanel>
 

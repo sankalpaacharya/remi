@@ -15,4 +15,11 @@ export interface LinkItem {
   category: string;
 }
 
-export type TabValue = "badges" | "content";
+export interface TechStackItem {
+  id: string;
+  name: string;
+  iconUrl: string;
+  category: string;
+}
+
+export type TabValue = "badges" | "content" | "tech-stack";
