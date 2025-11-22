@@ -62,8 +62,7 @@ export const demo = `## Demo
 [Insert demo link here]
 `;
 
-
-const titleWithLogo = `
+export const titleWithLogo = `
 <div id="top"></div>
 
 <p align="center">Help us grow and star us on Github! ⭐️</p>
@@ -84,9 +83,10 @@ The Open Source Qualtrics Alternative
 <a href="https://formbricks.com/">Website</a>
 </p>
 </p>
-`
+`;
 
-const techStack = `
+export const techStack = `## Tech Stack
+
 <div align="center">
   <table>
     <tr>
@@ -114,4 +114,4 @@ const techStack = `
     </tr>
   </table>
 </div>
-`
+`;
