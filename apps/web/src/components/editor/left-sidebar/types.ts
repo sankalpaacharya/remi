@@ -24,3 +24,4 @@ export interface TechStackItem {
 
 export type TabValue = "badges" | "content" | "icons";
 export type IconTabValue = "tech-stack" | "social";
+export type ContentTabValue = "regular" | "generate";

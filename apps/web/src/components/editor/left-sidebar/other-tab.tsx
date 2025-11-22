@@ -14,10 +14,14 @@ import {
   Check,
   ImageIcon,
   Layers,
+  Sparkles,
+  List,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/store/useStore";
+import type { ContentTabValue } from "./types";
 import {
   title,
   installation,
@@ -72,6 +76,7 @@ const contentItems = [
 
 export function OtherTab() {
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
+  const [activeSubTab, setActiveSubTab] = useState<ContentTabValue>("regular");
   const { appendMarkdownContent } = useStore();
 
   const handleAddContent = (item: (typeof contentItems)[0]) => {
@@ -90,34 +95,68 @@ export function OtherTab() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      {/* Content Items List */}
-      <div className="py-1">
-        {contentItems.map((item) => {
-          const Icon = item.icon;
-          const isAdded = addedItems.has(item.id);
-          return (
-            <Button
-              key={item.id}
-              variant="ghost"
-              onClick={() => handleAddContent(item)}
-              className={cn(
-                "w-full px-3 py-2 pl-6 h-auto flex items-center gap-2 hover:bg-accent/50 transition-colors group justify-start rounded-none"
-              )}
-            >
-              <Icon className="size-3.5 text-primary shrink-0" />
-              <span className="text-xs truncate flex-1 text-left">
-                {item.name}
-              </span>
-              {isAdded ? (
-                <Check className="size-3 text-green-500 shrink-0" />
-              ) : (
-                <Plus className="size-3 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-              )}
-            </Button>
-          );
-        })}
-      </div>
-    </div>
+    <Tabs
+      value={activeSubTab}
+      onValueChange={(value) => setActiveSubTab(value as ContentTabValue)}
+      className="flex-1 flex flex-col"
+    >
+      <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto">
+        <TabsTrigger
+          value="regular"
+          className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent gap-2"
+        >
+          <List className="size-3.5" />
+          <span>Regular</span>
+        </TabsTrigger>
+        <TabsTrigger
+          value="generate"
+          className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent gap-2"
+        >
+          <Sparkles className="size-3.5" />
+          <span>Generate</span>
+        </TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="regular" className="flex-1 m-0 flex flex-col">
+        <div className="flex-1 overflow-y-auto">
+          {/* Content Items List */}
+          <div className="py-1">
+            {contentItems.map((item) => {
+              const Icon = item.icon;
+              const isAdded = addedItems.has(item.id);
+              return (
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  onClick={() => handleAddContent(item)}
+                  className={cn(
+                    "w-full px-3 py-2 pl-6 h-auto flex items-center gap-2 hover:bg-accent/50 transition-colors group justify-start rounded-none"
+                  )}
+                >
+                  <Icon className="size-3.5 text-primary shrink-0" />
+                  <span className="text-xs truncate flex-1 text-left">
+                    {item.name}
+                  </span>
+                  {isAdded ? (
+                    <Check className="size-3 text-green-500 shrink-0" />
+                  ) : (
+                    <Plus className="size-3 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                  )}
+                </Button>
+              );
+            })}
+          </div>
+        </div>
+      </TabsContent>
+
+      <TabsContent value="generate" className="flex-1 m-0 flex flex-col">
+        {/* Generate content - leave empty for now */}
+        <div className="flex-1 flex items-center justify-center p-4">
+          <p className="text-xs text-muted-foreground text-center">
+            AI generation coming soon...
+          </p>
+        </div>
+      </TabsContent>
+    </Tabs>
   );
 }
