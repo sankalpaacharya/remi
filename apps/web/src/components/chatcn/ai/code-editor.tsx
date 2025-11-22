@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useRef, useState } from "react";
-import Editor, { EditorProps } from "@monaco-editor/react";
+import Editor, { type EditorProps } from "@monaco-editor/react";
 import {
   Tooltip,
   TooltipProvider,

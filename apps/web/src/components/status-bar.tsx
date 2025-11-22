@@ -32,7 +32,7 @@ export function StatusBar() {
       label: "GitHub",
       value: "@sankalpaacharya",
       icon: Github,
-      link: "https://github.com/sankalpaacharya",
+      link: "https://github.com/sankalpaacharya/remi",
     },
   ];
 

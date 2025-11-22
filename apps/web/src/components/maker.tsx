@@ -6,6 +6,7 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
+import LeftSideBar from "./editor/left-sidebar";
 
 export function ReadmeMaker() {
   const [state, setState] = useState(
@@ -14,7 +15,14 @@ export function ReadmeMaker() {
 
   return (
     <ResizablePanelGroup direction="horizontal" className="w-full h-full">
-      <ResizablePanel defaultSize={50} className="flex flex-col">
+      {/* Left Sidebar */}
+      <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
+        <LeftSideBar />
+      </ResizablePanel>
+
+      <ResizableHandle withHandle />
+
+      <ResizablePanel defaultSize={40} className="flex flex-col">
         <div className="px-4 py-2 border-b">
           <h2 className="text-lg font-semibold">README.md</h2>
         </div>
@@ -38,7 +46,7 @@ export function ReadmeMaker() {
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={50} minSize={30}>
+      <ResizablePanel defaultSize={40} minSize={30}>
         <div className="h-full flex flex-col">
           <div className="px-4 py-2 border-b">
             <h2 className="text-lg font-semibold">Preview</h2>
