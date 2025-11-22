@@ -5,3 +5,5 @@
 ![](.github/image.png)
 
 ![](.github/templates.png)
+
+![](.github/icons.png)
