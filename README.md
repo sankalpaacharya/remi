@@ -2,4 +2,4 @@
 
 <samp>Generate Super Cool Readme for your project</samp>
 
-![](https://i.ibb.co/svrxvmyC/image.png)
+<img src="https://i.ibb.co/svrxvmyC/image.png"/>
