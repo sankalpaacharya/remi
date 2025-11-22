@@ -1,4 +1,5 @@
 import { SunMedium, Clock, Calendar, Twitter, Github } from "lucide-react";
+import RepoInput from "./repourl-input";
 
 export function StatusBar() {
   const workspaces = [
@@ -53,7 +54,9 @@ export function StatusBar() {
           </div>
         ))}
       </div>
-
+      <div>
+        <RepoInput />
+      </div>
       {/* Status Items */}
       <div className="flex items-center gap-4">
         {statusItems.map(({ label, value, icon: Icon, link }, idx) => {

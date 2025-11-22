@@ -27,6 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { toast } from "sonner";
+import { Markdown } from "../chatcn/ai/markdown";
 
 // Types
 interface BadgeItem {

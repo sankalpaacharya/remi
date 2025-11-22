@@ -52,7 +52,9 @@ export function ReadmeMaker() {
             <h2 className="text-lg font-semibold">Preview</h2>
           </div>
           <div className="flex-1 overflow-auto p-4">
-            <Markdown theme={"dark"}>{state}</Markdown>
+            <Markdown theme={"dark"} className="font-sans">
+              {state}
+            </Markdown>
           </div>
         </div>
       </ResizablePanel>
