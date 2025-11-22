@@ -1,0 +1,111 @@
+import {
+  Star,
+  GitFork,
+  AlertCircle,
+  GitCommit,
+  Heart,
+  Code,
+  Users,
+  TrendingUp,
+  Award,
+  Shield,
+} from "lucide-react";
+import type { BadgeItem, LinkItem } from "./types";
+
+export const getBadgeUrls = (repoUrl: string) => {
+  const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+  const repoPath = match ? `${match[1]}/${match[2]}` : "user/repo";
+
+  return {
+    stars: `https://img.shields.io/github/stars/${repoPath}`,
+    forks: `https://img.shields.io/github/forks/${repoPath}`,
+    issues: `https://img.shields.io/github/issues/${repoPath}`,
+    lastCommit: `https://img.shields.io/github/last-commit/${repoPath}`,
+    love: "https://img.shields.io/badge/Made%20with-Love-ff69b4",
+    openSource: "https://img.shields.io/badge/Open%20Source-%E2%9D%A4-purple",
+    contributions:
+      "https://img.shields.io/badge/contributions-welcome-blue.svg",
+    starHistory: `https://api.star-history.com/svg?repos=${repoPath}&type=Date`,
+    contributors: `https://contrib.rocks/image?repo=${repoPath}`,
+  };
+};
+
+export const getBadgeItems = (repoUrl: string): BadgeItem[] => {
+  const urls = getBadgeUrls(repoUrl);
+
+  return [
+    {
+      id: "stars",
+      name: "GitHub Stars",
+      url: urls.stars,
+      icon: Star,
+      category: "Stats",
+    },
+    {
+      id: "forks",
+      name: "GitHub Forks",
+      url: urls.forks,
+      icon: GitFork,
+      category: "Stats",
+    },
+    {
+      id: "issues",
+      name: "GitHub Issues",
+      url: urls.issues,
+      icon: AlertCircle,
+      category: "Stats",
+    },
+    {
+      id: "lastCommit",
+      name: "Last Commit",
+      url: urls.lastCommit,
+      icon: GitCommit,
+      category: "Stats",
+    },
+    {
+      id: "love",
+      name: "Made with Love",
+      url: urls.love,
+      icon: Heart,
+      category: "Custom",
+    },
+    {
+      id: "openSource",
+      name: "Open Source",
+      url: urls.openSource,
+      icon: Code,
+      category: "Custom",
+    },
+    {
+      id: "contributions",
+      name: "Contributions Welcome",
+      url: urls.contributions,
+      icon: Users,
+      category: "Custom",
+    },
+    {
+      id: "star-history",
+      name: "Star History Chart",
+      url: urls.starHistory,
+      icon: TrendingUp,
+      category: "Analytics",
+    },
+    {
+      id: "contributors",
+      name: "Contributors",
+      url: urls.contributors,
+      icon: Award,
+      category: "Analytics",
+    },
+  ];
+};
+
+// Additional links (without URLs - placeholders for future features)
+export const ADDITIONAL_LINKS: LinkItem[] = [
+  {
+    id: "shields-io",
+    name: "Shields.io",
+    icon: Shield,
+    category: "Badges",
+  },
+];
