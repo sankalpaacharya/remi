@@ -1,7 +1,6 @@
 "use client";
 import { StatusBar } from "@/components/status-bar";
 import { ReadmeMaker } from "@/components/maker";
-import LeftSideBar from "@/components/editor/left-sidebar";
 
 export default function Home() {
   return (
