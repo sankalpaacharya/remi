@@ -1,20 +1,42 @@
 "use client";
 
-import { useState } from "react";
-import { templates } from "@/constant/templates";
+import { useState, useEffect } from "react";
+import { templateMetadata, type Template } from "@/constant/templates";
+import { loadAllTemplates } from "@/lib/template-loader";
 import { Markdown } from "@/components/chatcn/ai/markdown";
 import { useStore } from "@/store/useStore";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { FileText, Check, ExternalLink } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { TemplateSidebar } from "../../components/templates/template-sidebar";
 
 export default function Templates() {
-  const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
+    null
+  );
   const [appliedId, setAppliedId] = useState<string | null>(null);
   const { setMarkdownContent } = useStore();
   const router = useRouter();
+
+  // Load templates on mount
+  useEffect(() => {
+    async function fetchTemplates() {
+      try {
+        const loadedTemplates = await loadAllTemplates(templateMetadata);
+        setTemplates(loadedTemplates);
+        setSelectedTemplate(loadedTemplates[0]);
+      } catch (error) {
+        console.error("Failed to load templates:", error);
+        toast.error("Failed to load templates");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchTemplates();
+  }, []);
 
   const handleApplyTemplate = (
     templateId: string,
@@ -35,75 +57,36 @@ export default function Templates() {
     toast.success("Template loaded in editor!");
   };
 
-  return (
-    <div className="flex h-full w-full overflow-hidden">
-      {/* Left Sidebar - Template List */}
-      <div className="w-80 border-r flex flex-col bg-background">
-        <div className="px-4 py-2 border-b">
-          <h2 className="text-lg font-semibold flex items-center gap-2">
-            <FileText className="size-5" />
-            Templates
-          </h2>
-          <p className="text-xs text-muted-foreground mt-1">
-            {templates.length} templates available
-          </p>
-        </div>
-
-        <div className="flex-1 overflow-y-auto">
-          {templates.map((template) => {
-            const isSelected = selectedTemplate.id === template.id;
-            const isApplied = appliedId === template.id;
-
-            return (
-              <div
-                key={template.id}
-                onClick={() => setSelectedTemplate(template)}
-                className={cn(
-                  "px-4 py-3 border-b cursor-pointer transition-colors group",
-                  isSelected
-                    ? "bg-primary/10 border-l-2 border-l-primary"
-                    : "hover:bg-accent/50 border-l-2 border-l-transparent"
-                )}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-sm truncate">
-                      {template.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                      {template.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {template.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] px-1.5 py-0.5 bg-muted rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  {isApplied && (
-                    <Check className="size-4 text-green-500 shrink-0" />
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="p-3 border-t bg-muted/30">
-          <Button
-            onClick={() => handleUseTemplate(selectedTemplate.content)}
-            className="w-full"
-            size="sm"
-          >
-            <ExternalLink className="size-4 mr-2" />
-            Use Template in Editor
-          </Button>
+  if (loading) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="size-8 animate-spin text-muted-foreground" />
+          <p className="text-sm text-muted-foreground">Loading templates...</p>
         </div>
       </div>
+    );
+  }
+
+  if (!selectedTemplate) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <p className="text-sm text-muted-foreground">No templates available</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex h-full w-full overflow-hidden">
+      {/* Left Sidebar */}
+      <TemplateSidebar
+        templates={templates}
+        selectedTemplate={selectedTemplate}
+        appliedId={appliedId}
+        onSelectTemplate={setSelectedTemplate}
+        onUseTemplate={() => handleUseTemplate(selectedTemplate.content)}
+        totalTemplates={templates.length}
+      />
 
       {/* Right Side - Preview */}
       <div className="flex-1 flex flex-col min-w-0">
