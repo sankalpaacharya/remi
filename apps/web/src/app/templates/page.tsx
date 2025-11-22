@@ -1,3 +1,3 @@
-export function Templates() {
-  return <div>hello</div>;
+export default function Templates() {
+  return <div>templates</div>;
 }
