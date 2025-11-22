@@ -1,14 +1,22 @@
+"use client";
+
 import { SunMedium, Clock, Calendar, Twitter, Github } from "lucide-react";
 import RepoInput from "./repourl-input";
+import { usePathname, useRouter } from "next/navigation";
 
 export function StatusBar() {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const workspaces = [
-    { id: 1, name: "Editor" },
-    { id: 2, name: "Templates" },
-    { id: 3, name: "Settings" },
-    { id: 4, name: "About" },
+    { id: 1, name: "Editor", path: "/" as const },
+    { id: 2, name: "Templates", path: "/templates" as const },
+    { id: 3, name: "Settings", path: "/settings" as const },
+    { id: 4, name: "About", path: "/about" as const },
   ];
-  const activeWorkspace = 1;
+
+  const activeWorkspace =
+    workspaces.find((ws) => ws.path === pathname)?.id || 1;
 
   const now = new Date();
   const time = now.toLocaleTimeString([], {
@@ -44,6 +52,7 @@ export function StatusBar() {
         {workspaces.map((workspace) => (
           <div
             key={workspace.id}
+            onClick={() => router.push(workspace.path)}
             className={`px-3 py-0.5 text-center cursor-pointer transition-colors ${
               workspace.id === activeWorkspace
                 ? "bg-primary text-primary-foreground"
