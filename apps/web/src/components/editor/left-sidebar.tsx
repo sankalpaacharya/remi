@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { Markdown } from "../chatcn/ai/markdown";
+import { useStore } from "@/store/useStore";
 
 // Types
 interface BadgeItem {
@@ -45,73 +46,80 @@ interface LinkItem {
   category: string;
 }
 
-// Badge configuration
-const BADGE_URLS = {
-  stars:
-    "https://img.shields.io/github/stars/sankalpaacharya/shadcn-collections",
-  forks:
-    "https://img.shields.io/github/forks/sankalpaacharya/shadcn-collections",
-  issues:
-    "https://img.shields.io/github/issues/sankalpaacharya/shadcn-collections",
-  lastCommit:
-    "https://img.shields.io/github/last-commit/sankalpaacharya/shadcn-collections",
-  love: "https://img.shields.io/badge/Made%20with-Love-ff69b4",
-  openSource: "https://img.shields.io/badge/Open%20Source-%E2%9D%A4-purple",
-  contributions: "https://img.shields.io/badge/contributions-welcome-blue.svg",
-} as const;
+// Badge configuration generator
+const getBadgeUrls = (repoUrl: string) => {
+  // Extract owner/repo from GitHub URL
+  const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+  const repoPath = match ? `${match[1]}/${match[2]}` : "user/repo";
 
-// Badge items with markdown-ready URLs
-const BADGE_ITEMS: BadgeItem[] = [
-  {
-    id: "stars",
-    name: "GitHub Stars",
-    url: BADGE_URLS.stars,
-    icon: Star,
-    category: "Stats",
-  },
-  {
-    id: "forks",
-    name: "GitHub Forks",
-    url: BADGE_URLS.forks,
-    icon: GitFork,
-    category: "Stats",
-  },
-  {
-    id: "issues",
-    name: "GitHub Issues",
-    url: BADGE_URLS.issues,
-    icon: AlertCircle,
-    category: "Stats",
-  },
-  {
-    id: "lastCommit",
-    name: "Last Commit",
-    url: BADGE_URLS.lastCommit,
-    icon: GitCommit,
-    category: "Stats",
-  },
-  {
-    id: "love",
-    name: "Made with Love",
-    url: BADGE_URLS.love,
-    icon: Heart,
-    category: "Custom",
-  },
-  {
-    id: "openSource",
-    name: "Open Source",
-    url: BADGE_URLS.openSource,
-    icon: Code,
-    category: "Custom",
-  },
-  {
-    id: "contributions",
-    name: "Contributions Welcome",
-    url: BADGE_URLS.contributions,
-    icon: Users,
-    category: "Custom",
-  },
-];
+  return {
+    stars: `https://img.shields.io/github/stars/${repoPath}`,
+    forks: `https://img.shields.io/github/forks/${repoPath}`,
+    issues: `https://img.shields.io/github/issues/${repoPath}`,
+    lastCommit: `https://img.shields.io/github/last-commit/${repoPath}`,
+    love: "https://img.shields.io/badge/Made%20with-Love-ff69b4",
+    openSource: "https://img.shields.io/badge/Open%20Source-%E2%9D%A4-purple",
+    contributions:
+      "https://img.shields.io/badge/contributions-welcome-blue.svg",
+  };
+};
+
+// Badge items configuration (URLs will be generated dynamically)
+const getBadgeItems = (repoUrl: string): BadgeItem[] => {
+  const urls = getBadgeUrls(repoUrl);
+
+  return [
+    {
+      id: "stars",
+      name: "GitHub Stars",
+      url: urls.stars,
+      icon: Star,
+      category: "Stats",
+    },
+    {
+      id: "forks",
+      name: "GitHub Forks",
+      url: urls.forks,
+      icon: GitFork,
+      category: "Stats",
+    },
+    {
+      id: "issues",
+      name: "GitHub Issues",
+      url: urls.issues,
+      icon: AlertCircle,
+      category: "Stats",
+    },
+    {
+      id: "lastCommit",
+      name: "Last Commit",
+      url: urls.lastCommit,
+      icon: GitCommit,
+      category: "Stats",
+    },
+    {
+      id: "love",
+      name: "Made with Love",
+      url: urls.love,
+      icon: Heart,
+      category: "Custom",
+    },
+    {
+      id: "openSource",
+      name: "Open Source",
+      url: urls.openSource,
+      icon: Code,
+      category: "Custom",
+    },
+    {
+      id: "contributions",
+      name: "Contributions Welcome",
+      url: urls.contributions,
+      icon: Users,
+      category: "Custom",
+    },
+  ];
+};
 
 // Additional links (without URLs - placeholders for future features)
 const ADDITIONAL_LINKS: LinkItem[] = [
@@ -154,10 +162,14 @@ const getUniqueCategories = (
 };
 
 export default function LeftSideBar() {
+  const { repoUrl } = useStore();
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set(["Stats", "Custom", "Analytics", "Badges"])
   );
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // Generate badge items based on current repo URL
+  const badgeItems = getBadgeItems(repoUrl);
 
   const toggleCategory = (category: string) => {
     setExpandedCategories((prev) => {
@@ -181,7 +193,7 @@ export default function LeftSideBar() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const categories = getUniqueCategories(BADGE_ITEMS, ADDITIONAL_LINKS);
+  const categories = getUniqueCategories(badgeItems, ADDITIONAL_LINKS);
 
   return (
     <div className="h-full w-full flex flex-col font-mono text-sm">
@@ -199,7 +211,7 @@ export default function LeftSideBar() {
           <CategorySection
             key={category}
             category={category}
-            badges={BADGE_ITEMS}
+            badges={badgeItems}
             links={ADDITIONAL_LINKS}
             isExpanded={expandedCategories.has(category)}
             onToggle={() => toggleCategory(category)}
@@ -210,9 +222,7 @@ export default function LeftSideBar() {
       </div>
 
       {/* Footer Info */}
-      <SidebarFooter
-        totalItems={BADGE_ITEMS.length + ADDITIONAL_LINKS.length}
-      />
+      <SidebarFooter totalItems={badgeItems.length + ADDITIONAL_LINKS.length} />
     </div>
   );
 }
@@ -289,6 +299,7 @@ interface BadgeItemProps {
 function BadgeItem({ item, isCopied, onCopy }: BadgeItemProps) {
   const Icon = item.icon;
   const hasUrl = "url" in item && item.url;
+  const markdownCode = hasUrl ? generateMarkdownImage(item.name, item.url) : "";
 
   return (
     <Tooltip>
@@ -320,11 +331,12 @@ function BadgeItem({ item, isCopied, onCopy }: BadgeItemProps) {
         </Button>
       </TooltipTrigger>
       {hasUrl && (
-        <TooltipContent side="right" className="font-mono text-xs max-w-xs">
-          <p className="mb-1">Click to copy markdown badge</p>
-          <code className="text-[10px] text-muted-foreground">
-            ![{item.name.toLowerCase().replace(/\s+/g, "-")}](...)
-          </code>
+        <TooltipContent
+          side="right"
+          className="bg-card border-border"
+          sideOffset={5}
+        >
+          <Markdown theme="dark">{markdownCode}</Markdown>
         </TooltipContent>
       )}
     </Tooltip>

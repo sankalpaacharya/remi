@@ -20,13 +20,10 @@ export default function RepoInput() {
 
   function onURLSubmit(url: string) {
     let fullUrl = url.trim();
-
     if (!fullUrl.startsWith("http")) {
       fullUrl = `https://github.com/${fullUrl}`;
     }
-
     fullUrl = fullUrl.replace(/\/$/, "");
-
     setRepoUrl(fullUrl);
   }
 
