@@ -11,9 +11,8 @@ import type { TabValue } from "./left-sidebar/types";
 
 export default function LeftSideBar() {
   const { repoUrl } = useStore();
-  const [activeTab, setActiveTab] = useState<TabValue>("badges");
+  const [activeTab, setActiveTab] = useState<TabValue>("content");
 
-  // Generate badge items based on current repo URL
   const badgeItems = getBadgeItems(repoUrl);
   const totalItems = badgeItems.length + ADDITIONAL_LINKS.length;
 
@@ -35,19 +34,22 @@ export default function LeftSideBar() {
       >
         <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto">
           <TabsTrigger
+            value="content"
+            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+          >
+            Content
+          </TabsTrigger>
+          <TabsTrigger
             value="badges"
             className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
           >
             Badges
           </TabsTrigger>
-          <TabsTrigger
-            value="other"
-            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
-          >
-            Other
-          </TabsTrigger>
         </TabsList>
 
+        <TabsContent value="content" className="flex-1 flex flex-col m-0">
+          <OtherTab />
+        </TabsContent>
         <TabsContent value="badges" className="flex-1 flex flex-col m-0">
           <BadgesTab badges={badgeItems} links={ADDITIONAL_LINKS} />
           {/* Footer for Badges tab */}
@@ -61,10 +63,6 @@ export default function LeftSideBar() {
               </div>
             </div>
           </div>
-        </TabsContent>
-
-        <TabsContent value="other" className="flex-1 flex flex-col m-0">
-          <OtherTab />
         </TabsContent>
       </Tabs>
     </div>

@@ -15,4 +15,4 @@ export interface LinkItem {
   category: string;
 }
 
-export type TabValue = "badges" | "other";
+export type TabValue = "badges" | "content";

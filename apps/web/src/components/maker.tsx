@@ -9,9 +9,7 @@ import {
 import LeftSideBar from "./editor/left-sidebar";
 
 export function ReadmeMaker() {
-  const [state, setState] = useState(
-    "# Hello World\n\nStart writing your README in markdown..."
-  );
+  const [state, setState] = useState("# Remi\n\n Super cool readme generator");
 
   return (
     <ResizablePanelGroup direction="horizontal" className="w-full h-full">
