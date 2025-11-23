@@ -1,6 +1,17 @@
 "use client";
 
-import { SunMedium, Clock, Calendar, Twitter, Github } from "lucide-react";
+import {
+  SunMedium,
+  Clock,
+  Calendar,
+  Twitter,
+  Github,
+  Trash2,
+  FileEdit,
+  Files,
+  Settings,
+  Info,
+} from "lucide-react";
 import RepoInput from "./repourl-input";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -9,10 +20,11 @@ export function StatusBar() {
   const router = useRouter();
 
   const workspaces = [
-    { id: 1, name: "Editor", path: "/" as const },
-    { id: 2, name: "Templates", path: "/templates" as const },
-    { id: 3, name: "Settings", path: "/settings" as const },
-    { id: 4, name: "About", path: "/about" as const },
+    { id: 1, name: "Editor", path: "/" as const, icon: FileEdit },
+    { id: 2, name: "Templates", path: "/templates" as const, icon: Files },
+    { id: 3, name: "Cleaner", path: "/clean" as const, icon: Trash2 },
+    { id: 4, name: "Settings", path: "/settings" as const, icon: Settings },
+    { id: 5, name: "About", path: "/about" as const, icon: Info },
   ];
 
   const activeWorkspace =
@@ -47,21 +59,24 @@ export function StatusBar() {
 
   return (
     <div className="flex w-full justify-between items-center px-3 py-1 bg-background border-b border-border text-foreground text-sm font-mono">
-      {/* Workspaces */}
       <div className="flex items-center gap-1">
-        {workspaces.map((workspace) => (
-          <div
-            key={workspace.id}
-            onClick={() => router.push(workspace.path)}
-            className={`px-3 py-0.5 text-center cursor-pointer transition-colors ${
-              workspace.id === activeWorkspace
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            }`}
-          >
-            {workspace.name}
-          </div>
-        ))}
+        {workspaces.map((workspace) => {
+          const Icon = workspace.icon;
+          return (
+            <div
+              key={workspace.id}
+              onClick={() => router.push(workspace.path)}
+              className={`px-3 py-0.5 flex items-center gap-1.5 cursor-pointer transition-colors ${
+                workspace.id === activeWorkspace
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              <Icon className="size-3.5" />
+              <span>{workspace.name}</span>
+            </div>
+          );
+        })}
       </div>
       <div>
         <RepoInput />
