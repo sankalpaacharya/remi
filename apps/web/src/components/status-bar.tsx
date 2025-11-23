@@ -14,17 +14,23 @@ import {
 } from "lucide-react";
 import RepoInput from "./repourl-input";
 import { usePathname, useRouter } from "next/navigation";
+import type { Route } from "next";
 
 export function StatusBar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const workspaces = [
-    { id: 1, name: "Editor", path: "/" as const, icon: FileEdit },
-    { id: 2, name: "Templates", path: "/templates" as const, icon: Files },
-    { id: 3, name: "Cleaner", path: "/clean" as const, icon: Trash2 },
-    { id: 4, name: "Settings", path: "/settings" as const, icon: Settings },
-    { id: 5, name: "About", path: "/about" as const, icon: Info },
+  const workspaces: {
+    id: number;
+    name: string;
+    path: Route;
+    icon: any;
+  }[] = [
+    { id: 1, name: "Editor", path: "/", icon: FileEdit },
+    { id: 2, name: "Templates", path: "/templates", icon: Files },
+    { id: 3, name: "Cleaner", path: "/del" as Route, icon: Trash2 },
+    { id: 4, name: "Settings", path: "/settings", icon: Settings },
+    { id: 5, name: "About", path: "/about", icon: Info },
   ];
 
   const activeWorkspace =
@@ -59,6 +65,7 @@ export function StatusBar() {
 
   return (
     <div className="flex w-full justify-between items-center px-3 py-1 bg-background border-b border-border text-foreground text-sm font-mono">
+      {/* Workspaces */}
       <div className="flex items-center gap-1">
         {workspaces.map((workspace) => {
           const Icon = workspace.icon;
@@ -78,9 +85,11 @@ export function StatusBar() {
           );
         })}
       </div>
+
       <div>
         <RepoInput />
       </div>
+
       {/* Status Items */}
       <div className="flex items-center gap-4">
         {statusItems.map(({ label, value, icon: Icon, link }, idx) => {
@@ -110,10 +119,12 @@ export function StatusBar() {
             </div>
           );
         })}
+
         <div className="flex items-center gap-1.5 ml-2 px-2 py-0.5 bg-muted/50">
           <Calendar className="size-3.5" />
           <span>{date}</span>
         </div>
+
         <div className="flex items-center gap-1.5 px-2 py-0.5 bg-primary/20 text-foreground">
           <Clock className="size-3.5" />
           <span className="font-semibold">{time}</span>
