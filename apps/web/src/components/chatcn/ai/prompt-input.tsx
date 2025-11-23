@@ -9,7 +9,6 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { Metadata } from "next";
 
 type PromptInputContext = {
   value: string;
@@ -41,25 +40,6 @@ function usePromptInputContext() {
 type PromptInputTextAreaProps = {
   disableAutoSize?: boolean;
 } & React.ComponentProps<typeof Textarea>;
-
-export const metadata: Metadata = {
-  title: "Prompt Input — Chatcn",
-  description:
-    "A ready-made prompt input component for AI chat interfaces. Customizable, responsive, and built with shadcn.",
-  openGraph: {
-    images: [
-      {
-        url: "https://chatcn.me/og-default.png",
-        width: 1200,
-        height: 630,
-        alt: "Prompt Input Component Preview",
-      },
-    ],
-  },
-  twitter: {
-    images: ["https://chatcn.me/og-default.png"],
-  },
-};
 
 export function PromptInputTextArea({
   className,
