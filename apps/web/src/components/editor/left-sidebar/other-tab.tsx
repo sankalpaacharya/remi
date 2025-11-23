@@ -35,6 +35,7 @@ import {
   techStack,
 } from "@/constant/content";
 import { toast } from "sonner";
+import { GenerateTab } from "./generate-tab";
 
 const contentItems = [
   { id: "title", name: "Title", icon: FileText, content: title },
@@ -150,12 +151,7 @@ export function OtherTab() {
       </TabsContent>
 
       <TabsContent value="generate" className="flex-1 m-0 flex flex-col">
-        {/* Generate content - leave empty for now */}
-        <div className="flex-1 flex items-center justify-center p-4">
-          <p className="text-xs text-muted-foreground text-center">
-            AI generation coming soon...
-          </p>
-        </div>
+        <GenerateTab />
       </TabsContent>
     </Tabs>
   );
