@@ -37,9 +37,9 @@ export default function LeftSideBar() {
       <Tabs
         value={activeTab}
         onValueChange={(value) => setActiveTab(value as TabValue)}
-        className="flex-1 flex flex-col"
+        className="flex-1 flex flex-col min-h-0"
       >
-        <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto">
+        <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto shrink-0">
           <TabsTrigger
             value="content"
             className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
@@ -60,13 +60,19 @@ export default function LeftSideBar() {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="content" className="flex-1 flex flex-col m-0">
+        <TabsContent
+          value="content"
+          className="flex-1 flex flex-col m-0 min-h-0 overflow-hidden"
+        >
           <OtherTab />
         </TabsContent>
-        <TabsContent value="badges" className="flex-1 flex flex-col m-0">
+        <TabsContent
+          value="badges"
+          className="flex-1 flex flex-col m-0 min-h-0 overflow-hidden"
+        >
           <BadgesTab badges={badgeItems} links={ADDITIONAL_LINKS} />
           {/* Footer for Badges tab */}
-          <div className="px-4 py-2 border-t">
+          <div className="px-4 py-2 border-t shrink-0">
             <div className="text-xs text-muted-foreground">
               <div className="flex items-center justify-between">
                 <span>Copy as Markdown</span>
@@ -77,13 +83,16 @@ export default function LeftSideBar() {
             </div>
           </div>
         </TabsContent>
-        <TabsContent value="icons" className="flex-1 flex flex-col m-0">
+        <TabsContent
+          value="icons"
+          className="flex-1 flex flex-col m-0 min-h-0 overflow-hidden"
+        >
           <TechStackTab
             techStackItems={TECH_STACK_ITEMS}
             socialItems={SOCIAL_MEDIA_ITEMS}
           />
           {/* Footer for Icons tab */}
-          <div className="px-4 py-2 border-t">
+          <div className="px-4 py-2 border-t shrink-0">
             <div className="text-xs text-muted-foreground">
               <div className="flex items-center justify-between">
                 <span>Click to add icons</span>

@@ -50,7 +50,7 @@ export function BadgesTab({ badges, links }: BadgesTabProps) {
   const categories = getUniqueCategories(badges, links);
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto overflow-x-hidden">
       {categories.map((category) => (
         <CategorySection
           key={category}

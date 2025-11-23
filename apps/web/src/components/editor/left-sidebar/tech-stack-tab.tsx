@@ -50,12 +50,12 @@ export function TechStackTab({
     }, {} as Record<string, TechStackItem[]>);
 
     return (
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <TooltipProvider>
           {Object.entries(groupedItems).map(([category, categoryItems]) => (
             <div key={category}>
               {/* Category Header */}
-              <div className="px-4 py-2 border-b bg-muted/30 sticky top-0 z-10">
+              <div className="px-4 py-2 border-b bg-muted/30">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-wide">
                     {category}
@@ -113,9 +113,9 @@ export function TechStackTab({
     <Tabs
       value={activeSubTab}
       onValueChange={(value) => setActiveSubTab(value as IconTabValue)}
-      className="flex-1 flex flex-col"
+      className="flex-1 flex flex-col min-h-0"
     >
-      <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto">
+      <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto shrink-0">
         <TabsTrigger
           value="tech-stack"
           className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent gap-2"
@@ -132,11 +132,17 @@ export function TechStackTab({
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="tech-stack" className="flex-1 m-0 flex flex-col">
+      <TabsContent
+        value="tech-stack"
+        className="flex-1 m-0 flex flex-col min-h-0 overflow-hidden"
+      >
         {renderIconGrid(techStackItems)}
       </TabsContent>
 
-      <TabsContent value="social" className="flex-1 m-0 flex flex-col">
+      <TabsContent
+        value="social"
+        className="flex-1 m-0 flex flex-col min-h-0 overflow-hidden"
+      >
         {renderIconGrid(socialItems)}
       </TabsContent>
     </Tabs>
