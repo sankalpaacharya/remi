@@ -8,9 +8,14 @@ export default function About() {
         <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
           About Remi
         </h1>
+        <p className="mb-3">
+          I don’t do Canva. I don’t do Figma. I do code. Remi is for everyone
+          like me who wants their repo to look elite without spending a single
+          minute on design.
+        </p>
         <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 px-4">
-          You don’t ask for attention, you take it. Remi builds the visuals that
-          make people click before they even know what your project does 🔥
+          Remi builds the visuals that make people click before they even know
+          what your project does
         </p>
         <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 px-4">
           Built with Next.js, TypeScript, and Tailwind CSS.
