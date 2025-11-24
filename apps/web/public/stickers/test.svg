@@ -1,0 +1,29 @@
+<svg
+  width="800"
+  height="300"
+  viewBox="0 0 800 300"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background Image -->
+  <image
+    href="https://i.ibb.co/C5qZyMkM/image.png"
+    x="0"
+    y="0"
+    preserveAspectRatio="xMidYMid slice"
+  />
+
+  <!-- Text On Top -->
+  <text
+    x="50%"
+    y="50%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-size="48"
+    font-family="Inter, sans-serif"
+    fill="white"
+    font-weight="700"
+    style="text-shadow: 0 2px 6px rgba(0,0,0,0.5)"
+  >
+    Sankalpa Acharya
+  </text>
+</svg>
