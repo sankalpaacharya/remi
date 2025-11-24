@@ -87,4 +87,28 @@ export const templateMetadata: TemplateMetadata[] = [
     category: "personal",
     filePath: "/templates/personal/creative-profile.md",
   },
+  {
+    id: "profile-modern-minimal",
+    name: "Modern Minimal",
+    description: "Clean, minimal profile with elegant badges and structure",
+    tags: ["profile", "minimal", "modern", "clean"],
+    category: "personal",
+    filePath: "/templates/personal/modern-minimal.md",
+  },
+  {
+    id: "profile-sleek-developer",
+    name: "Sleek Developer",
+    description: "Professional developer profile with tech stack grid and analytics",
+    tags: ["profile", "professional", "sleek", "developer"],
+    category: "personal",
+    filePath: "/templates/personal/sleek-developer.md",
+  },
+  {
+    id: "profile-elegant-coder",
+    name: "Elegant Coder",
+    description: "Stylish profile with gradient themes and featured projects",
+    tags: ["profile", "elegant", "gradient", "stylish"],
+    category: "personal",
+    filePath: "/templates/personal/elegant-coder.md",
+  },
 ];
