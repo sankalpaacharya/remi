@@ -6,7 +6,7 @@ import {
   Calendar,
   Twitter,
   Github,
-  Trash2,
+  Wrench,
   FileEdit,
   Files,
   Settings,
@@ -35,7 +35,7 @@ export function StatusBar() {
   }[] = [
     { id: 1, name: "Editor", path: "/", icon: FileEdit },
     { id: 2, name: "Templates", path: "/templates", icon: Files },
-    { id: 3, name: "Cleaner", path: "/del" as Route, icon: Trash2 },
+    { id: 3, name: "Tools", path: "/tools" as Route, icon: Wrench },
     { id: 4, name: "Settings", path: "/settings", icon: Settings },
     { id: 5, name: "About", path: "/about", icon: Info },
   ];

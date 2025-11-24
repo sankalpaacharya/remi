@@ -1,6 +1,6 @@
-### Remi
+Remi
 
-<samp>Generate Super Cool Readme for your project</samp>
+<samp>A collection of tools to help you showcase your work in an aesthetic way.</samp>
 
 ![](.github/image.png)
 

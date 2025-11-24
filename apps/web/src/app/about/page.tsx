@@ -9,8 +9,8 @@ export default function About() {
           About Remi
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 px-4">
-          Remi is a beautiful README generator designed to help developers
-          create stunning documentation for their projects.
+          You don’t ask for attention, you take it. Remi builds the visuals that
+          make people click before they even know what your project does 🔥
         </p>
         <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 px-4">
           Built with Next.js, TypeScript, and Tailwind CSS.
