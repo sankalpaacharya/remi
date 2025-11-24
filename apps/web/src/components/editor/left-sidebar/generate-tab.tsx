@@ -53,14 +53,14 @@ export function GenerateTab() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex-1 overflow-y-auto p-4 space-y-6">
+      <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-4 sm:space-y-6">
         {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center p-6">
-            <Sparkles className="size-12 text-muted-foreground mb-4" />
-            <h3 className="text-sm font-semibold mb-2">
+          <div className="flex flex-col items-center justify-center h-full text-center p-4 sm:p-6">
+            <Sparkles className="size-10 sm:size-12 text-muted-foreground mb-3 sm:mb-4" />
+            <h3 className="text-xs sm:text-sm font-semibold mb-2">
               Generate README Content
             </h3>
-            <p className="text-xs text-muted-foreground max-w-xs">
+            <p className="text-[10px] sm:text-xs text-muted-foreground max-w-xs">
               Describe what you want to add to your README and AI will generate
               it for you.
             </p>
@@ -105,7 +105,7 @@ export function GenerateTab() {
       </div>
 
       {/* Input Area */}
-      <div className="p-3 border-t">
+      <div className="p-2 sm:p-3 border-t">
         <PromptInput
           value={prompt}
           onValueChange={setPrompt}
@@ -115,17 +115,18 @@ export function GenerateTab() {
           <PromptInputTextArea
             placeholder="What do you want to generate?"
             onKeyDown={handleKeyDown}
+            className="text-xs sm:text-sm"
           />
           <PromptInputActions className="justify-end pt-2">
             <PromptInputAction tooltip="submit">
               <Button
                 variant="default"
                 size="icon"
-                className="h-8 w-8 rounded-full"
+                className="h-7 w-7 sm:h-8 sm:w-8 rounded-full"
                 onClick={handleGenerate}
                 disabled={!prompt.trim() || isGenerating}
               >
-                <ArrowUp className="size-5" />
+                <ArrowUp className="size-4 sm:size-5" />
               </Button>
             </PromptInputAction>
           </PromptInputActions>

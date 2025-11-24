@@ -67,7 +67,7 @@ export function TechStackTab({
               </div>
 
               {/* Icons Grid */}
-              <div className="grid grid-cols-6 gap-2 p-3">
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-1.5 sm:gap-2 p-2 sm:p-3">
                 {categoryItems.map((item) => {
                   const isAdded = copiedId === item.id;
 
@@ -77,7 +77,7 @@ export function TechStackTab({
                         <button
                           onClick={() => handleAddIcon(item)}
                           className={cn(
-                            "relative aspect-square rounded-md border-2 p-2 transition-all",
+                            "relative aspect-square rounded-md border-2 p-1.5 sm:p-2 transition-all",
                             "hover:border-primary hover:bg-accent/50",
                             "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                             isAdded && "border-green-500 bg-green-500/10"
@@ -90,13 +90,13 @@ export function TechStackTab({
                           />
                           {isAdded && (
                             <div className="absolute inset-0 flex items-center justify-center bg-background/80 rounded-md">
-                              <Check className="size-5 text-green-500" />
+                              <Check className="size-4 sm:size-5 text-green-500" />
                             </div>
                           )}
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="bottom">
-                        <p className="text-xs">{item.name}</p>
+                        <p className="text-[10px] sm:text-xs">{item.name}</p>
                       </TooltipContent>
                     </Tooltip>
                   );

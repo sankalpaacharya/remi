@@ -11,10 +11,17 @@ import {
   Files,
   Settings,
   Info,
+  Menu,
 } from "lucide-react";
 import RepoInput from "./repourl-input";
 import { usePathname, useRouter } from "next/navigation";
 import type { Route } from "next";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function StatusBar() {
   const pathname = usePathname();
@@ -64,39 +71,70 @@ export function StatusBar() {
   ];
 
   return (
-    <div className="flex w-full justify-between items-center px-3 py-1 bg-background border-b border-border text-foreground text-sm font-mono">
-      {/* Workspaces */}
-      <div className="flex items-center gap-1">
+    <div className="flex w-full justify-between items-center px-2 sm:px-3 py-1 bg-background border-b border-border text-foreground text-sm font-mono">
+      {/* Workspaces - Desktop */}
+      <div className="hidden md:flex items-center gap-1">
         {workspaces.map((workspace) => {
           const Icon = workspace.icon;
           return (
             <div
               key={workspace.id}
               onClick={() => router.push(workspace.path)}
-              className={`px-3 py-0.5 flex items-center gap-1.5 cursor-pointer transition-colors ${
+              className={`px-2 lg:px-3 py-0.5 flex items-center gap-1.5 cursor-pointer transition-colors ${
                 workspace.id === activeWorkspace
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <Icon className="size-3.5" />
-              <span>{workspace.name}</span>
+              <span className="hidden lg:inline">{workspace.name}</span>
             </div>
           );
         })}
       </div>
 
-      <div>
+      {/* Workspaces - Mobile Menu */}
+      <div className="md:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2 hover:text-primary transition-colors">
+            <Menu className="size-4" />
+            <span className="text-xs">
+              {workspaces.find((ws) => ws.id === activeWorkspace)?.name}
+            </span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            {workspaces.map((workspace) => {
+              const Icon = workspace.icon;
+              return (
+                <DropdownMenuItem
+                  key={workspace.id}
+                  onClick={() => router.push(workspace.path)}
+                  className={
+                    workspace.id === activeWorkspace
+                      ? "bg-primary/10 text-primary"
+                      : ""
+                  }
+                >
+                  <Icon className="size-4 mr-2" />
+                  <span>{workspace.name}</span>
+                </DropdownMenuItem>
+              );
+            })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <div className="hidden sm:block">
         <RepoInput />
       </div>
 
       {/* Status Items */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         {statusItems.map(({ label, value, icon: Icon, link }, idx) => {
           const content = (
             <>
               <Icon className="size-3.5" />
-              <span className="text-xs">{value}</span>
+              <span className="text-xs hidden lg:inline">{value}</span>
             </>
           );
 
@@ -113,21 +151,21 @@ export function StatusBar() {
           ) : (
             <div
               key={idx}
-              className="flex items-center gap-1.5 text-muted-foreground"
+              className="hidden xl:flex items-center gap-1.5 text-muted-foreground"
             >
               {content}
             </div>
           );
         })}
 
-        <div className="flex items-center gap-1.5 ml-2 px-2 py-0.5 bg-muted/50">
+        <div className="hidden sm:flex items-center gap-1.5 ml-2 px-2 py-0.5 bg-muted/50">
           <Calendar className="size-3.5" />
-          <span>{date}</span>
+          <span className="hidden md:inline">{date}</span>
         </div>
 
         <div className="flex items-center gap-1.5 px-2 py-0.5 bg-primary/20 text-foreground">
           <Clock className="size-3.5" />
-          <span className="font-semibold">{time}</span>
+          <span className="font-semibold text-xs sm:text-sm">{time}</span>
         </div>
       </div>
     </div>

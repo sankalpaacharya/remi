@@ -31,16 +31,19 @@ export default function RepoInput() {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-1">
-          <Github className="size-3.5" />
-          <span className="text-xs">{displayUrl}</span>
+          <Github className="size-3 sm:size-3.5" />
+          <span className="text-xs max-w-[150px] sm:max-w-none truncate">
+            {displayUrl}
+          </span>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="w-64 sm:w-auto">
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <Input
               value={displayUrl}
               onChange={(e) => onURLSubmit(e.target.value)}
               placeholder="owner/repository"
+              className="text-xs sm:text-sm"
             />
           </DropdownMenuItem>
         </DropdownMenuContent>

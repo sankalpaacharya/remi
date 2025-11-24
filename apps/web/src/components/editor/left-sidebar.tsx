@@ -24,12 +24,12 @@ export default function LeftSideBar() {
   const totalIconsCount = TECH_STACK_ITEMS.length + SOCIAL_MEDIA_ITEMS.length;
 
   return (
-    <div className="h-full w-full flex flex-col font-mono text-sm">
+    <div className="h-full w-full flex flex-col font-mono text-xs sm:text-sm">
       {/* Sidebar Header */}
-      <div className="px-4 py-2 border-b">
+      <div className="px-3 sm:px-4 py-2 border-b">
         <div className="flex items-center gap-2">
-          <Link2 className="size-[18px] text-primary" />
-          <span className="text-lg font-semibold">Resources</span>
+          <Link2 className="size-4 sm:size-[18px] text-primary" />
+          <span className="text-base sm:text-lg font-semibold">Resources</span>
         </div>
       </div>
 
@@ -42,19 +42,19 @@ export default function LeftSideBar() {
         <TabsList className="w-full rounded-none border-b bg-transparent p-0 h-auto shrink-0">
           <TabsTrigger
             value="content"
-            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent text-xs sm:text-sm"
           >
             Content
           </TabsTrigger>
           <TabsTrigger
             value="badges"
-            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent text-xs sm:text-sm"
           >
             Badges
           </TabsTrigger>
           <TabsTrigger
             value="icons"
-            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+            className="flex-1 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-transparent text-xs sm:text-sm"
           >
             Icons
           </TabsTrigger>
@@ -72,10 +72,11 @@ export default function LeftSideBar() {
         >
           <BadgesTab badges={badgeItems} links={ADDITIONAL_LINKS} />
           {/* Footer for Badges tab */}
-          <div className="px-4 py-2 border-t shrink-0">
-            <div className="text-xs text-muted-foreground">
+          <div className="px-3 sm:px-4 py-2 border-t shrink-0">
+            <div className="text-[10px] sm:text-xs text-muted-foreground">
               <div className="flex items-center justify-between">
-                <span>Copy as Markdown</span>
+                <span className="hidden sm:inline">Copy as Markdown</span>
+                <span className="sm:hidden">Markdown</span>
                 <span className="text-primary font-semibold">
                   {totalItems} items
                 </span>
@@ -92,10 +93,11 @@ export default function LeftSideBar() {
             socialItems={SOCIAL_MEDIA_ITEMS}
           />
           {/* Footer for Icons tab */}
-          <div className="px-4 py-2 border-t shrink-0">
-            <div className="text-xs text-muted-foreground">
+          <div className="px-3 sm:px-4 py-2 border-t shrink-0">
+            <div className="text-[10px] sm:text-xs text-muted-foreground">
               <div className="flex items-center justify-between">
-                <span>Click to add icons</span>
+                <span className="hidden sm:inline">Click to add icons</span>
+                <span className="sm:hidden">Add icons</span>
                 <span className="text-primary font-semibold">
                   {totalIconsCount} icons
                 </span>
