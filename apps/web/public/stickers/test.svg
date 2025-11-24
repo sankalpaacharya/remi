@@ -1,12 +1,13 @@
+
 <svg
   width="800"
   height="300"
   viewBox="0 0 800 300"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <!-- Background Image -->
+  <!-- Background Image embedded as Base64 -->
   <image
-    href="https://i.ibb.co/C5qZyMkM/image.png"
+    href="https://raw.githubusercontent.com/sankalpaacharya/remi/refs/heads/main/apps/web/public/stickers/banner.png"
     x="0"
     y="0"
     preserveAspectRatio="xMidYMid slice"
