@@ -13,7 +13,10 @@
     "dev:native": "turbo -F native dev",
     "dev:web": "turbo -F web dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "konva": "^10.0.12",
+    "react-konva": "^19.2.0"
+  },
   "devDependencies": {
     "turbo": "^2.5.4"
   },
