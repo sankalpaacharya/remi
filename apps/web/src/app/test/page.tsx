@@ -1,5 +1,5 @@
 "use client";
-import { Stage, Layer, Image, Text } from "react-konva";
+import { Stage, Layer, Image, Group, Rect } from "react-konva";
 import { useEffect, useState } from "react";
 import EditorLeft from "./editor-left";
 
@@ -21,25 +21,27 @@ export default function Page() {
       <EditorLeft />
 
       <div className="flex-1 flex items-center justify-center p-8">
-        <div className="border rounded-lg shadow-lg">
-          <Stage width={stageWidth} height={stageHeight} className="">
-            <Layer>
-              {banner && (
-                <Image
-                  image={banner}
-                  x={600}
-                  y={400}
+        <Stage width={stageWidth} height={stageHeight} className="">
+          <Layer>
+            {banner && (
+              <Group x={600} y={400} draggable offsetX={1000 / 2} offsetY={500 / 2}>
+                <Rect
                   width={1000}
                   height={500}
-                  draggable
-                  opacity={0.5}
-                  offsetX={1000 / 2}
-                  offsetY={500 / 2}
+                  stroke="#e5e7eb"
+                  strokeWidth={2}
+                  cornerRadius={8}
                 />
-              )}
-            </Layer>
-          </Stage>
-        </div>
+                <Image
+                  image={banner}
+                  width={1000}
+                  height={500}
+                  opacity={0.5}
+                />
+              </Group>
+            )}
+          </Layer>
+        </Stage>
       </div>
     </div>
   );
