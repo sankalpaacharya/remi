@@ -126,7 +126,7 @@ export default function EditorLeft() {
                 {["🎨", "⭐", "💫", "🎯", "🚀", "💡", "✨", "🔥"].map((emoji, i) => (
                   <button
                     key={i}
-                    className="aspect-square border border-border/40 rounded-md flex items-center justify-center text-2xl hover:bg-accent hover:border-primary/50 active:scale-95 transition-all duration-200"
+                    className="aspect-square border border-border/40 rounded-md flex items-center justify-center text-md hover:bg-accent hover:border-primary/50 active:scale-95 transition-all duration-200"
                   >
                     {emoji}
                   </button>
